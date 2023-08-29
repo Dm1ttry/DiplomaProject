@@ -4,18 +4,18 @@ import SingInPage from "../pages/signup.page";
 import PageFactory from "../pages/page.factory";
 import MoviesPage from "../pages/movies.page";
 
-test.describe("Test Kinopoisk.ru", async () => {
+test.describe("Test signIn Kinopoisk.ru", async () => {
     let main: MainPage;
     let singIn: SingInPage;
-    let movies: MoviesPage;
     const correctPaswrd = "test1249qwerty";
-    const correctEmail = "dimagaponov78@gmail.com";
+    const correctEmail = "testkinopoisk123@gmail.com";
     const errEmail = "user@@@@MailComm";
+    const errPhone = "3334655555555";
+
 
     test.beforeEach(async ({ page }) => {
         main = PageFactory.GetPage(page, "mainPage") as MainPage;
         singIn = PageFactory.GetPage(page, "signin") as SingInPage;
-        movies = PageFactory.GetPage(page, "movies") as MoviesPage;
     });
 
     test("Test1 error email in sign InPage", async () => {
@@ -29,7 +29,7 @@ test.describe("Test Kinopoisk.ru", async () => {
     test("Test2 error phone in sign InPage", async () => {
         await main.openKinopoisk();
         await singIn.openSignInPage();
-        await singIn.SignInPhone("3334655555555");
+        await singIn.SignInPhone(errPhone);
         await expect(singIn.ErrorPhone).toContainText(
             "Недопустимый формат номера"
         );
@@ -37,9 +37,22 @@ test.describe("Test Kinopoisk.ru", async () => {
     test("Test3  signIn Kinopoisk.ru", async () => {
         await main.openKinopoisk();
         await singIn.openSignInPage();
-        await singIn.SignIn("dimagaponov78@gmail.com", "test1249qwerty");
+        await singIn.SignIn(correctEmail, correctPaswrd);
         await expect(singIn.UserAvatar).toBeTruthy();
     });
+});
+test.describe("Test movies  Kinopoisk.ru", async () => {
+    let singIn: SingInPage;
+    let movies: MoviesPage;
+    const correctPaswrd = "test1249qwerty";
+    const correctEmail = "testkinopoisk123@gmail.com";
+    // const correctEmail = "dimagaponov78@gmail.com";
+
+    test.beforeEach(async ({ page }) => {
+        singIn = PageFactory.GetPage(page, "signin") as SingInPage;
+        movies = PageFactory.GetPage(page, "movies") as MoviesPage;
+    });
+
     test("Test4  check add will watch Kinopoisk.ru", async () => {
         test.slow();
         await movies.openMovies();
@@ -60,3 +73,5 @@ test.describe("Test Kinopoisk.ru", async () => {
         await expect(movies.UserFilmRate).toHaveText("6");
     });
 });
+
+

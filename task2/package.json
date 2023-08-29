@@ -1,0 +1,21 @@
+{
+  "name": "task2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "post": "jest tests/postTest.spec.ts",
+    "get": "jest tests/getTests.spec.ts",
+    "put": "jest tests/putTests.spec.ts",
+    "delete": "jest tests/deleteTest.spec.ts"
+  },
+  "author": "Dmittry",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jest": "^29.5.4",
+    "@types/superagent": "^4.1.18",
+    "jest": "^29.6.4",
+    "superagent": "^8.1.2",
+    "ts-jest": "^29.1.1"
+  }
+}

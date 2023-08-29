@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test --headed"
+    "test": "npx playwright test --headed --reporter=allure-playwright",
+    "allure:report:generate": "npx allure generate ./allure-results --clean",
+    "allure:report:open": "npx allure open ./allure-report"
   },
   "author": "Dm1ttry",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.37.1"
+    "@playwright/test": "^1.37.1",
+    "allure-commandline": "^2.24.0",
+    "allure-playwright": "^2.6.0"
   },
   "directories": {
     "test": "tests"
